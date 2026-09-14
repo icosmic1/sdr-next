@@ -5,8 +5,8 @@ from .config import get_settings
 
 url = get_settings().database_url
 
-# Render (and some other hosts) hand out "postgres://", which SQLAlchemy 2.x
-# no longer recognises. Normalise it and pin the psycopg 3 driver.
+# Render hands out "postgres://", which SQLAlchemy 2.x no longer accepts.
+# Normalise it and pin the psycopg 3 driver.
 if url.startswith("postgres://"):
     url = url.replace("postgres://", "postgresql+psycopg://", 1)
 elif url.startswith("postgresql://"):
@@ -18,8 +18,8 @@ if is_sqlite:
     Path("data").mkdir(exist_ok=True)
     engine = create_engine(url, connect_args={"check_same_thread": False})
 else:
-    # Free-tier Postgres drops idle connections; pre_ping + recycle avoids
-    # serving a 500 on the first request after the app has been idle.
+    # Free-tier Postgres drops idle connections; pre_ping avoids a 500 on the
+    # first request after the service has been idle.
     engine = create_engine(url, pool_pre_ping=True, pool_recycle=300, pool_size=5, max_overflow=5)
 
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)

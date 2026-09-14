@@ -14,5 +14,5 @@ RUN mkdir -p data
 
 EXPOSE 8000
 
-# Single worker on purpose: SQLite + in-process APScheduler.
+# Single worker on purpose: in-process APScheduler + research queue.
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1"]

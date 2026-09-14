@@ -17,13 +17,37 @@ services:
         fromDatabase:
           name: sdr-next-db
           property: connectionString
+
+      # Secret. sync:false means Render prompts you for it and never stores
+      # it in the repo. Outreach generation stays disabled until it is set.
+      - key: GEMINI_API_KEY
+        sync: false
+
       - key: APP_NAME
         value: SDR Next
       - key: RESEARCH_INTERVAL_MINUTES
-        value: "360"
+        value: "30"
+      - key: STARTUP_REFRESH_ENABLED
+        value: "true"
+      - key: RESEARCH_WORKER_COUNT
+        value: "1"
+      - key: COMPANY_FRESHNESS_MINUTES
+        value: "5"
+      - key: PERSON_REFRESH_COOLDOWN_MINUTES
+        value: "5"
       - key: REQUEST_TIMEOUT_SECONDS
         value: "12"
       - key: MAX_RESEARCH_PAGES
         value: "5"
+      - key: GOOGLE_NEWS_ENABLED
+        value: "true"
+      - key: HACKER_NEWS_ENABLED
+        value: "true"
+      - key: MAX_EXTERNAL_NEWS_RESULTS
+        value: "8"
+      - key: GEMINI_MODEL
+        value: gemini-3.6-flash
+      - key: GEMINI_TIMEOUT_SECONDS
+        value: "30"
       - key: USER_AGENT
         value: SDRNextResearchBot/1.0 (+https://render.com)
