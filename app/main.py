@@ -241,8 +241,8 @@ async def generate_prospect_outreach(prospect_id:int,db:Session=Depends(get_db))
         draft=await generate_outreach(account,prospect)
     except OutreachConfigurationError as exc:
         raise HTTPException(503,str(exc))
-    except OutreachProviderError:
-        raise HTTPException(502,"Gemini could not generate the outreach draft. Try again shortly.")
+    except OutreachProviderError as exc:
+        raise HTTPException(502,f"Gemini could not generate the outreach draft. {exc}")
     db.add(Activity(account_id=account.id,activity_type="AI_OUTREACH_GENERATED",detail=f"Gemini generated a source-grounded outreach draft for {prospect.name}.")); db.commit()
     return OutreachOut(prospect_id=prospect.id,model=get_settings().gemini_model,**draft.__dict__)
 

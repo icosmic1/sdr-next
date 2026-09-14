@@ -100,7 +100,17 @@ async def generate_outreach(account: Account, prospect: Prospect) -> OutreachDra
         async with httpx.AsyncClient(timeout=settings.gemini_timeout_seconds) as client:
             response = await client.post(url, params={"key": settings.gemini_api_key}, json=payload)
         if response.status_code >= 400:
-            raise OutreachProviderError(f"Gemini request failed ({response.status_code}).")
+            # Surface Google's own message; without it a bad model name, a
+            # rejected payload field and a restricted key are indistinguishable.
+            detail = ""
+            try:
+                error = response.json().get("error", {})
+                detail = error.get("message") or ""
+                if error.get("status"):
+                    detail = f"{error['status']}: {detail}"
+            except Exception:
+                detail = response.text[:300]
+            raise OutreachProviderError(f"Gemini request failed ({response.status_code}). {detail}".strip())
         data = response.json()
     except httpx.HTTPError as exc:
         raise OutreachProviderError("Gemini could not be reached.") from exc
