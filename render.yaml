@@ -1,0 +1,29 @@
+databases:
+  - name: sdr-next-db
+    plan: free
+    databaseName: sdr_next
+    user: sdr_next
+
+services:
+  - type: web
+    name: sdr-next
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      # Auto-wired by Render from the database above. Do not set this by hand.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sdr-next-db
+          property: connectionString
+      - key: APP_NAME
+        value: SDR Next
+      - key: RESEARCH_INTERVAL_MINUTES
+        value: "360"
+      - key: REQUEST_TIMEOUT_SECONDS
+        value: "12"
+      - key: MAX_RESEARCH_PAGES
+        value: "5"
+      - key: USER_AGENT
+        value: SDRNextResearchBot/1.0 (+https://render.com)

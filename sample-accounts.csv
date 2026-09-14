@@ -1,0 +1,4 @@
+company_name,company_domain,prospect_name,prospect_title,email,phone,industry,employee_count,icp_score
+OpenAI,openai.com,Alex Morgan,VP Sales,alex@example.com,,Artificial Intelligence,4000,92
+HubSpot,hubspot.com,Jordan Lee,Chief Revenue Officer,jordan@example.com,,B2B SaaS,8000,90
+Stripe,stripe.com,Taylor Smith,Director of RevOps,taylor@example.com,,Fintech,8000,88
