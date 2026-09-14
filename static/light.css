@@ -1,0 +1,42 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --line: #dce3ec;
+  --muted: #526176;
+  --text: #192335;
+  --lime: #317045;
+  --green: #216e47;
+  --red: #a83243;
+}
+body { background: var(--bg); }
+button, .upload { background: #fff; color: var(--text); }
+button:hover, .upload:hover { background: #f1f7f2; }
+button:focus-visible, .upload:focus-within, a:focus-visible, input:focus-visible { outline: 2px solid #246b3c; outline-offset: 2px; }
+aside { background: #fff; border-right-color: var(--line); }
+.brand>b { background: #256e40; color: #fff; }
+.brand span, .prospect span { color: #256e40; }
+nav button { color: #405269; }
+nav button.active, nav button:hover { background: #e9f3ec; color: #205b35; }
+.user>b, .row>i, .company>i, .grid button>i { background: #e9e5f7; color: #594292; }
+header label, .metrics label { color: #4b5a6e; }
+.primary { background: #256e40; border-color: #256e40; color: #fff; }
+.primary:hover { background: #1a5530; color: #fff; }
+.metrics article, .panel { background: var(--panel); box-shadow: 0 2px 12px rgba(26, 45, 66, .04); }
+.metrics p { color: var(--muted); }
+.heading input { background: #fff; color: var(--text); }
+.row, .signals>a { border-bottom-color: var(--line); }
+.row:hover, .row.selected { background: #f0f7f1; }
+.row.selected { box-shadow: inset 3px 0 #256e40; }
+.rank { color: var(--muted); }
+.action { color: #205b35; background: #e5f3e8; }
+.recommend { background: #f4faf5; }
+.recommend p b { color: var(--green); }
+.ring { border-color: #317045; }
+.reason>i, .signals>a>i { background: #e5f3e8; color: #205b35; }
+.reason small, .reason em { color: var(--muted); }
+.changed>div { background: #f1f4f8; }
+.changed span b { color: var(--text); }
+.grid button { background: #fff; }
+.grid button:hover { background: #f0f7f1; }
+.signals>a em { color: #205b35; }
